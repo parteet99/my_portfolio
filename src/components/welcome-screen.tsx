@@ -3,12 +3,15 @@
 import {
   useCallback,
   useEffect,
+  useRef,
   useState,
   type ComponentProps,
   type CSSProperties,
 } from "react";
 
 const EXIT_MS = 700;
+const SCROLL_THRESHOLD = 12;
+const SWIPE_THRESHOLD = 40;
 
 function Anim({
   children,
@@ -25,16 +28,20 @@ function Anim({
 
 export function WelcomeScreen() {
   const [phase, setPhase] = useState<"enter" | "exit" | "done">("enter");
-  const [canInteract, setCanInteract] = useState(false);
+  const [canScroll, setCanScroll] = useState(false);
+  const touchStartY = useRef(0);
 
   const dismiss = useCallback(() => {
     if (phase !== "enter") return;
     setPhase("exit");
-    window.setTimeout(() => setPhase("done"), EXIT_MS);
+    window.setTimeout(() => {
+      setPhase("done");
+      document.getElementById("introduction")?.scrollIntoView({ behavior: "smooth" });
+    }, EXIT_MS);
   }, [phase]);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setCanInteract(true), 1200);
+    const timer = window.setTimeout(() => setCanScroll(true), 1200);
     return () => window.clearTimeout(timer);
   }, []);
 
@@ -47,15 +54,35 @@ export function WelcomeScreen() {
   }, [phase]);
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        dismiss();
-      }
+    if (phase !== "enter" || !canScroll) return;
+
+    const onWheel = (e: WheelEvent) => {
+      if (e.deltaY < SCROLL_THRESHOLD) return;
+      e.preventDefault();
+      dismiss();
     };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [dismiss]);
+
+    const onTouchStart = (e: TouchEvent) => {
+      touchStartY.current = e.touches[0]?.clientY ?? 0;
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      const y = e.touches[0]?.clientY ?? 0;
+      if (touchStartY.current - y < SWIPE_THRESHOLD) return;
+      e.preventDefault();
+      dismiss();
+    };
+
+    window.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: false });
+
+    return () => {
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+    };
+  }, [phase, canScroll, dismiss]);
 
   if (phase === "done") return null;
 
@@ -67,7 +94,6 @@ export function WelcomeScreen() {
       className={`welcome-overlay fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden px-6 ${
         phase === "exit" ? "welcome-overlay--exit" : ""
       }`}
-      onClick={() => canInteract && dismiss()}
     >
       <div className="welcome-bg" aria-hidden />
       <div className="welcome-grid" aria-hidden />
@@ -83,7 +109,7 @@ export function WelcomeScreen() {
 
         <h1 className="font-display welcome-title text-5xl font-bold tracking-tight sm:text-7xl md:text-8xl">
           <span className="welcome-line block overflow-hidden">
-            <span className="welcome-line-inner inline-block">Parteetjot</span>
+            <span className="welcome-line-inner inline-block">{"{Parteetjot}"}</span>
           </span>
           <span className="welcome-line block overflow-hidden">
             <span className="welcome-line-inner welcome-line-inner--delay inline-block bg-gradient-to-r from-violet-600 via-fuchsia-500 to-cyan-500 bg-clip-text text-transparent dark:from-violet-400 dark:via-fuchsia-400 dark:to-cyan-400">
@@ -106,34 +132,18 @@ export function WelcomeScreen() {
           style={{ animationDelay: "0.7s" }}
           aria-hidden
         />
-
-        <Anim
-          className="welcome-cta mt-12 flex flex-col items-center gap-4"
-          style={{ animationDelay: "0.85s" }}
-        >
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              dismiss();
-            }}
-            disabled={!canInteract}
-            className="welcome-btn relative rounded-full bg-zinc-900 px-8 py-3 text-sm font-semibold text-white transition-transform hover:scale-105 disabled:opacity-40 dark:bg-zinc-100 dark:text-zinc-900"
-          >
-            Explore portfolio
-          </button>
-          <p className="text-xs text-zinc-500">Click anywhere or press Enter</p>
-        </Anim>
       </div>
 
       <Anim
-        className="welcome-scroll absolute bottom-10 left-1/2 -translate-x-1/2"
-        style={{ animationDelay: "1.1s" }}
-        aria-hidden
+        className="welcome-scroll absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3"
+        style={{ animationDelay: "0.85s" }}
       >
         <span className="welcome-scroll-mouse block h-9 w-5 rounded-full border-2 border-zinc-400/60 dark:border-zinc-500/60">
           <span className="welcome-scroll-dot mx-auto mt-1.5 block h-1.5 w-1 rounded-full bg-violet-500" />
         </span>
+        <p className="text-xs font-medium uppercase tracking-widest text-zinc-500">
+          Scroll to continue
+        </p>
       </Anim>
     </div>
   );
