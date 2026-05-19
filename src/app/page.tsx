@@ -1,3 +1,5 @@
+import { ResumeSection } from "@/components/resume-section";
+
 export default function Home() {
   return (
     <div className="flex flex-1 flex-col">
@@ -50,19 +52,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section
-        id="resume"
-        className="scroll-mt-16 border-t border-zinc-200 px-6 py-24 dark:border-zinc-800 sm:px-10"
-      >
-        <div className="mx-auto max-w-3xl text-center sm:text-left">
-          <h2 className="text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
-            Resume
-          </h2>
-          <p className="mt-4 text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Add a download link or embed your resume PDF when it is ready.
-          </p>
-        </div>
-      </section>
+      <ResumeSection />
     </div>
   );
 }
