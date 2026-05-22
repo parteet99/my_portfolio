@@ -32,13 +32,13 @@ export const resume = {
     "Next.js",
     "HTML & CSS",
     "Tailwind CSS",
-    "REST APIs",
     "Git",
     "Responsive UI",
     "Performance",
     "Accessibility",
     "ChatGPT",
     "Cursor IDE",
+    "Vs Code IDE",
     "Postman"
   ],
   experience: [
