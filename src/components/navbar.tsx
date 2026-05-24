@@ -45,9 +45,9 @@ export function Navbar() {
         </ul>
 
         {/* Right Side */}
-        <div className="flex items-center gap-2">
+        {/* <div className="flex items-center gap-2">
           <ThemeToggle />
-        </div>
+        </div> */}
       </nav>
 
       {/* Mobile Bottom Nav */}

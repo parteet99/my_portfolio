@@ -86,7 +86,7 @@ export function IntroductionSection() {
               </p>
               <p className="mt-4 text-sm leading-relaxed text-muted">
                 Based in India · open to remote roles and collaborations that
-                value clarity, craft, and kind teamwork.
+                value clarity and kind teamwork.
               </p>
             </div>
 
@@ -103,12 +103,12 @@ export function IntroductionSection() {
                   B.Tech CSE
                 </dd>
               </div>
-              <div className="flex justify-between gap-4">
+              {/* <div className="flex justify-between gap-4">
                 <dt className="text-muted">Availability</dt>
                 <dd className="font-medium text-foreground text-right">
                   Open to opportunities
                 </dd>
-              </div>
+              </div> */}
             </dl>
           </div>
         </aside>
