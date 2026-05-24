@@ -150,7 +150,7 @@ export function ResumeSection() {
           description="Experience, education, and skills — download a PDF copy if you'd like to share it with your team."
         />
 
-        <button
+        {/* <button
           type="button"
           onClick={handleDownload}
           className="inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 self-start rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-accent-foreground shadow-md shadow-accent/20 transition hover:bg-accent/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:self-auto"
@@ -158,7 +158,7 @@ export function ResumeSection() {
           <DownloadIcon />
           Download PDF
           <span className="sr-only">({resumeFileName})</span>
-        </button>
+        </button> */}
       </div>
 
       <div className="mt-12 grid gap-8 lg:grid-cols-[minmax(0,1fr)_280px]">
