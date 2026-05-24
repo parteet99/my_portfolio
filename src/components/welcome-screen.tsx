@@ -95,40 +95,38 @@ export function WelcomeScreen() {
         phase === "exit" ? "welcome-overlay--exit" : ""
       }`}
     >
-      <div className="welcome-bg" aria-hidden />
-      <div className="welcome-grid" aria-hidden />
-
       <div className="welcome-content relative z-10 flex max-w-4xl flex-col items-center text-center">
         <Anim
-          className="welcome-badge mb-8 inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-500/10 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-violet-600 dark:text-violet-300"
+          className="welcome-badge mb-8 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2 text-sm font-medium text-muted shadow-sm"
           style={{ animationDelay: "0.15s" }}
         >
-          <span className="welcome-pulse h-1.5 w-1.5 rounded-full bg-violet-500" />
-          Portfolio
+          <span className="text-base" aria-hidden>
+            👋
+          </span>
+          Nice to meet you
         </Anim>
 
-        <h1 className="font-display welcome-title text-5xl font-bold tracking-tight sm:text-7xl md:text-8xl">
+        <h1 className="font-display welcome-title text-5xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-7xl md:text-8xl">
           <span className="welcome-line block overflow-hidden">
-            <span className="welcome-line-inner inline-block">{"{Parteetjot}"}</span>
+            <span className="welcome-line-inner inline-block">Parteetjot</span>
           </span>
           <span className="welcome-line block overflow-hidden">
-            <span className="welcome-line-inner welcome-line-inner--delay inline-block bg-gradient-to-r from-violet-600 via-fuchsia-500 to-cyan-500 bg-clip-text text-transparent dark:from-violet-400 dark:via-fuchsia-400 dark:to-cyan-400">
+            <span className="welcome-line-inner welcome-line-inner--delay inline-block text-accent">
               Singh
             </span>
           </span>
         </h1>
 
         <Anim
-          className="welcome-role mt-10 text-lg font-medium tracking-wide text-zinc-600 sm:text-xl dark:text-zinc-400"
+          className="welcome-role mt-8 max-w-md text-lg leading-relaxed text-muted sm:text-xl"
           style={{ animationDelay: "0.55s" }}
         >
-          <span className="text-violet-500 dark:text-violet-400">{"< "}</span>
-          Frontend Developer
-          <span className="text-violet-500 dark:text-violet-400">{" />"}</span>
+          Frontend developer who cares about clarity, craft, and interfaces
+          that feel good to use.
         </Anim>
 
         <div
-          className="welcome-divider welcome-animate mt-10 h-px max-w-xs bg-gradient-to-r from-transparent via-violet-500 to-transparent"
+          className="welcome-divider welcome-animate mt-10 h-px max-w-xs bg-border"
           style={{ animationDelay: "0.7s" }}
           aria-hidden
         />
@@ -138,11 +136,11 @@ export function WelcomeScreen() {
         className="welcome-scroll absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3"
         style={{ animationDelay: "0.85s" }}
       >
-        <span className="welcome-scroll-mouse block h-9 w-5 rounded-full border-2 border-zinc-400/60 dark:border-zinc-500/60">
-          <span className="welcome-scroll-dot mx-auto mt-1.5 block h-1.5 w-1 rounded-full bg-violet-500" />
+        <span className="welcome-scroll-mouse block h-9 w-5 rounded-full border-2 border-border">
+          <span className="welcome-scroll-dot mx-auto mt-1.5 block h-1.5 w-1 rounded-full bg-accent" />
         </span>
-        <p className="text-xs font-medium uppercase tracking-widest text-zinc-500">
-          Scroll to continue
+        <p className="text-xs font-medium tracking-wide text-muted">
+          Scroll when you&apos;re ready
         </p>
       </Anim>
     </div>

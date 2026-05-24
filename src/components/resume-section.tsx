@@ -3,6 +3,7 @@
 import { useCallback, useRef } from "react";
 import { resume, resumeFileName } from "@/data/resume";
 import { ResumePrintDocument } from "@/components/resume-print";
+import { SectionHeader, SectionShell, SkillPill, SurfaceCard } from "@/components/ui/section";
 
 const PRINT_STYLES = `
   @page { size: A4; margin: 14mm; }
@@ -141,132 +142,121 @@ export function ResumeSection() {
   }, []);
 
   return (
-    <section
-      id="resume"
-      className="scroll-mt-16 border-t border-zinc-200 px-6 py-24 dark:border-zinc-800 sm:px-10"
-    >
-      <div className="mx-auto max-w-5xl">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="text-sm font-medium uppercase tracking-widest text-violet-600 dark:text-violet-400">
-              Resume
+    <SectionShell id="resume" variant="muted">
+      <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <SectionHeader
+          label="Resume"
+          title="A snapshot of my journey"
+          description="Experience, education, and skills — download a PDF copy if you'd like to share it with your team."
+        />
+
+        <button
+          type="button"
+          onClick={handleDownload}
+          className="inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 self-start rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-accent-foreground shadow-md shadow-accent/20 transition hover:bg-accent/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:self-auto"
+        >
+          <DownloadIcon />
+          Download PDF
+          <span className="sr-only">({resumeFileName})</span>
+        </button>
+      </div>
+
+      <div className="mt-12 grid gap-8 lg:grid-cols-[minmax(0,1fr)_280px]">
+        <SurfaceCard as="div" className="hover:translate-y-0 hover:shadow-card">
+          <header className="border-b border-border pb-6">
+            <h3 className="font-display text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+              {resume.name}
+            </h3>
+            <p className="mt-1 text-base font-medium text-accent">
+              {resume.title}
             </p>
-          </div>
+            <p className="mt-4 text-sm leading-relaxed text-muted">
+              {resume.summary}
+            </p>
+          </header>
 
-          <button
-            type="button"
-            onClick={handleDownload}
-            className="group inline-flex shrink-0 items-center cursor-pointer justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 via-fuchsia-600 to-violet-600 bg-[length:200%_auto] px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-violet-500/25 transition-all hover:bg-right hover:shadow-violet-500/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-500"
-          >
-            <DownloadIcon />
-            Download PDF
-            <span className="sr-only">({resumeFileName})</span>
-          </button>
-        </div>
-
-        <div className="mt-12 grid gap-8 lg:grid-cols-[minmax(0,1fr)_280px]">
-          <div className="relative overflow-hidden rounded-2xl border border-zinc-200/80 bg-white shadow-xl shadow-zinc-900/5 dark:border-zinc-800 dark:bg-zinc-900/50 dark:shadow-none">
-            <div
-              className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-violet-600 via-fuchsia-500 to-cyan-500"
-              aria-hidden
-            />
-            <div className="absolute -right-20 -top-20 h-48 w-48 rounded-full bg-violet-500/10 blur-3xl dark:bg-violet-500/20" aria-hidden />
-            <div className="relative p-6 sm:p-8">
-              <header className="border-b border-zinc-100 pb-6 dark:border-zinc-800">
-                <h3 className="font-display text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-3xl">
-                  {resume.name}
-                </h3>
-                <p className="mt-1 text-base font-medium text-violet-600 dark:text-violet-400">
-                  {resume.title}
-                </p>
-                <p className="mt-4 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-                  {resume.summary}
-                </p>
-              </header>
-
-              <div className="mt-6 space-y-8">
-                <div>
-                  <h4 className="text-xs font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400">
-                    Experience
-                  </h4>
-                  <ul className="mt-4 space-y-6">
-                    {resume.experience.map((job) => (
-                      <li key={`${job.company}-${job.period}`}>
-                        <div className="flex flex-wrap items-baseline justify-between gap-2">
-                          <p className="font-semibold text-zinc-900 dark:text-zinc-100">
-                            {job.role}
-                          </p>
-                          <span className="text-xs font-medium text-zinc-500 dark:text-zinc-500">
-                            {job.period}
-                          </span>
-                        </div>
-                        <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                          {job.company}
-                          {job.location ? ` · ${job.location}` : ""}
-                        </p>
-                        <ul className="mt-2 space-y-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-                          {job.highlights.slice(0, 2).map((item) => (
-                            <li key={item} className="flex gap-2">
-                              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-violet-500" aria-hidden />
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div>
-                  <h4 className="text-xs font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400">
-                    Education
-                  </h4>
-                  <ul className="mt-4 space-y-4">
-                    {resume.education.map((edu) => (
-                      <li key={`${edu.school}-${edu.period}`}>
-                        <p className="font-semibold text-zinc-900 dark:text-zinc-100">
-                          {edu.degree}
-                        </p>
-                        <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                          {edu.school} · {edu.period}
-                        </p>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <aside className="flex flex-col gap-4">
-            <div className="rounded-2xl border border-zinc-200/80 bg-zinc-50/80 p-5 dark:border-zinc-800 dark:bg-zinc-900/40">
-              <h4 className="text-xs font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400">
-                Core skills
+          <div className="mt-6 space-y-8">
+            <div>
+              <h4 className="text-sm font-semibold text-foreground">
+                Experience
               </h4>
-              <ul className="mt-4 flex flex-wrap gap-2">
-                {resume.skills.map((skill) => (
-                  <li
-                    key={skill}
-                    className="rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-1 text-xs font-medium text-violet-700 dark:text-violet-300"
-                  >
-                    {skill}
+              <ul className="mt-4 space-y-6">
+                {resume.experience.map((job) => (
+                  <li key={`${job.company}-${job.period}`}>
+                    <div className="flex flex-wrap items-baseline justify-between gap-2">
+                      <p className="font-semibold text-foreground">
+                        {job.role}
+                      </p>
+                      <span className="rounded-full bg-surface-muted px-2.5 py-0.5 text-xs font-medium text-muted">
+                        {job.period}
+                      </span>
+                    </div>
+                    <p className="text-sm text-muted">
+                      {job.company}
+                      {job.location ? ` · ${job.location}` : ""}
+                    </p>
+                    <ul className="mt-2 space-y-1.5 text-sm leading-relaxed text-muted">
+                      {job.highlights.slice(0, 2).map((item) => (
+                        <li key={item} className="flex gap-2.5">
+                          <span
+                            className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+                            aria-hidden
+                          />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="rounded-2xl border border-zinc-200/80 bg-zinc-50/80 p-5 dark:border-zinc-800 dark:bg-zinc-900/40">
-              <h4 className="text-xs font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400">
-                Contact
+            <div>
+              <h4 className="text-sm font-semibold text-foreground">
+                Education
               </h4>
-              <ul className="mt-4 space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
-                <li>{resume.email}</li>
-                <li>{resume.phone}</li>
-                <li>{resume.location}</li>
+              <ul className="mt-4 space-y-4">
+                {resume.education.map((edu) => (
+                  <li key={`${edu.school}-${edu.period}`}>
+                    <p className="font-semibold text-foreground">
+                      {edu.degree}
+                    </p>
+                    <p className="text-sm text-muted">
+                      {edu.school} · {edu.period}
+                    </p>
+                  </li>
+                ))}
               </ul>
             </div>
-          </aside>
-        </div>
+          </div>
+        </SurfaceCard>
+
+        <aside className="flex flex-col gap-4">
+          <SurfaceCard as="div" className="hover:translate-y-0 hover:shadow-card">
+            <h4 className="text-sm font-semibold text-foreground">
+              Core skills
+            </h4>
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {resume.skills.map((skill) => (
+                <li key={skill}>
+                  <SkillPill>{skill}</SkillPill>
+                </li>
+              ))}
+            </ul>
+          </SurfaceCard>
+
+          <SurfaceCard as="div" className="hover:translate-y-0 hover:shadow-card">
+            <h4 className="text-sm font-semibold text-foreground">Let&apos;s talk</h4>
+            <p className="mt-2 text-sm text-muted">
+              Happy to connect about roles, freelance work, or swapping ideas.
+            </p>
+            <ul className="mt-4 space-y-2 text-sm text-foreground">
+              <li>{resume.email}</li>
+              <li>{resume.phone}</li>
+              <li className="text-muted">{resume.location}</li>
+            </ul>
+          </SurfaceCard>
+        </aside>
       </div>
 
       <div
@@ -276,6 +266,6 @@ export function ResumeSection() {
       >
         <ResumePrintDocument />
       </div>
-    </section>
+    </SectionShell>
   );
 }
