@@ -1,5 +1,4 @@
 import { NavHashLink } from "@/components/nav-hash-link";
-import { ThemeToggle } from "@/components/theme-toggle";
 import Image from "next/image";
 
 const navItems = [
@@ -43,11 +42,6 @@ export function Navbar() {
             </li>
           ))}
         </ul>
-
-        {/* Right Side */}
-        <div className="flex items-center gap-2">
-          <ThemeToggle />
-        </div>
       </nav>
 
       {/* Mobile Bottom Nav */}
