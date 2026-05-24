@@ -16,7 +16,6 @@ export function ResumePrintDocument() {
           <p>{resume.email}</p>
           <p>{resume.phone}</p>
           <p>{resume.location}</p>
-          <p>{resume.links.portfolio}</p>
           <p>{resume.links.linkedin}</p>
           <p>{resume.links.github}</p>
         </div>
