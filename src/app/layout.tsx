@@ -4,6 +4,7 @@ import { Navbar } from "@/components/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { WelcomeScreen } from "@/components/welcome-screen";
 import "./globals.css";
+import { AnimatedBackground } from "@/components/animations/animated-background";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,7 +40,12 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${syne.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <ThemeProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          forcedTheme="dark"
+        >
+          <AnimatedBackground />
           <WelcomeScreen />
           <Navbar />
           <main className="flex flex-1 flex-col pt-16">{children}</main>
