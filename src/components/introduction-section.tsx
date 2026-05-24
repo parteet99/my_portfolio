@@ -25,17 +25,9 @@ export function IntroductionSection() {
 
       <div className="relative mx-auto grid max-w-5xl items-center gap-12 lg:grid-cols-[1fr_auto] lg:gap-16">
         <div className="max-w-xl">
-          <p className="inline-flex items-center gap-2 text-sm font-medium text-accent">
-            <span className="text-lg" aria-hidden>
-              👋
-            </span>
-            Hey, I&apos;m Parteetjot
-          </p>
 
           <h1 className="font-display mt-4 text-4xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-5xl lg:text-[3.25rem]">
-            I craft thoughtful{" "}
-            <span className="text-accent">web interfaces</span> people enjoy
-            using.
+            Hey, I&apos;m <span className="text-accent">Parteetjot</span>
           </h1>
 
           <p className="mt-6 text-lg leading-relaxed text-muted">

@@ -61,7 +61,6 @@ const focusAreas = [
   "Computer Science",
   "Software Engineering",
   "Web Development",
-  "Data Structures",
 ] as const;
 
 export function QualificationsSection() {

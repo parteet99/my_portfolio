@@ -16,7 +16,7 @@ export type ResumeEducation = {
 export const resume = {
   name: "Parteetjot Singh",
   title: "Frontend Developer",
-  location: "Available for remote & on-site",
+  location: "Available for remote & Hybrid",
   email: "parteetjot@email.com",
   phone: "+1 (000) 000-0000",
   links: {
@@ -35,7 +35,6 @@ export const resume = {
     "Git",
     "Responsive UI",
     "Performance",
-    "Accessibility",
     "ChatGPT",
     "Cursor IDE",
     "Vs Code IDE",
@@ -70,7 +69,7 @@ export const resume = {
       school: "Amritsar Group of Colleges",
       period: "2019 — 2023",
       details:
-        "Batch 2019–2023 · Coursework in web development, data structures, and software engineering",
+        "Batch 2019–2023 · Coursework in web development and software engineering",
     },
   ] satisfies ResumeEducation[],
 } as const;
