@@ -66,10 +66,11 @@ export const resume = {
   ] satisfies ResumeExperience[],
   education: [
     {
-      degree: "Bachelor's in Computer Science (or related field)",
-      school: "Your University",
+      degree: "B.Tech — Computer Science & Engineering",
+      school: "Amritsar Group of Colleges",
       period: "2019 — 2023",
-      details: "Relevant coursework: Web Development, Data Structures, Software Engineering",
+      details:
+        "Batch 2019–2023 · Coursework in web development, data structures, and software engineering",
     },
   ] satisfies ResumeEducation[],
 } as const;

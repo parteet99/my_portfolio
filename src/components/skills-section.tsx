@@ -1,11 +1,17 @@
 import { resume } from "@/data/resume";
+import {
+  SectionHeader,
+  SectionShell,
+  SkillPill,
+  SurfaceCard,
+} from "@/components/ui/section";
 
 const skillCategories = [
   {
     title: "Languages & frameworks",
-    description: "Core stack for building fast, polished web interfaces",
-    accent: "from-violet-500/20 to-fuchsia-500/10",
-    border: "group-hover:border-violet-500/30",
+    description:
+      "The everyday tools I reach for when shaping products on the web.",
+    iconBg: "bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-300",
     skills: [
       "TypeScript",
       "React",
@@ -16,16 +22,15 @@ const skillCategories = [
   },
   {
     title: "Craft & quality",
-    description: "Practices that keep UI reliable, fast, and inclusive",
-    accent: "from-cyan-500/15 to-violet-500/10",
-    border: "group-hover:border-cyan-500/30",
+    description:
+      "How I keep interfaces fast, inclusive, and pleasant to maintain.",
+    iconBg: "bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300",
     skills: ["Git", "Responsive UI", "Performance", "Accessibility"],
   },
   {
     title: "Tools & workflow",
-    description: "Everyday tools for building, testing, and shipping",
-    accent: "from-fuchsia-500/15 to-violet-500/10",
-    border: "group-hover:border-fuchsia-500/30",
+    description: "What helps me move from idea to shipped UI with confidence.",
+    iconBg: "bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-300",
     skills: ["ChatGPT", "Cursor IDE", "Postman", "Vs Code IDE"],
   },
 ] as const;
@@ -102,96 +107,53 @@ export function SkillsSection() {
   const otherSkills = resume.skills.filter((skill) => !categorized.has(skill));
 
   return (
-    <section
-      id="skills"
-      className="scroll-mt-16 relative overflow-hidden border-t border-zinc-200 px-6 py-24 dark:border-zinc-800 sm:px-10"
-    >
-      <div
-        className="pointer-events-none absolute inset-0 opacity-60 dark:opacity-40"
-        aria-hidden
-      >
-        <div className="absolute -left-32 top-1/4 h-72 w-72 rounded-full bg-violet-500/10 blur-3xl" />
-        <div className="absolute -right-24 bottom-0 h-64 w-64 rounded-full bg-fuchsia-500/10 blur-3xl" />
-        <div
-          className="absolute inset-0 opacity-30 dark:opacity-20"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgb(139 92 246 / 0.05) 1px, transparent 1px), linear-gradient(90deg, rgb(139 92 246 / 0.05) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-            maskImage:
-              "radial-gradient(ellipse 80% 70% at 50% 30%, black, transparent)",
-          }}
-        />
-      </div>
+    <SectionShell id="skills" variant="muted">
+      <SectionHeader
+        label="Skills"
+        title="What I bring to the table"
+        description="A practical mix of frontend craft, modern frameworks, and the habits that keep projects healthy long after launch."
+      />
 
-      <div className="relative mx-auto max-w-5xl">
-        <div className="max-w-2xl">
-          <p className="text-sm font-medium uppercase tracking-widest text-violet-600 dark:text-violet-400">
-            Skills
-          </p>
-          <h2 className="font-display mt-3 text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-4xl">
-            What I work with
-          </h2>
-          <p className="mt-4 text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            From TypeScript and React to accessibility and performance — the
-            stack and practices I use to ship polished frontend experiences.
-          </p>
-        </div>
-
-        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {skillCategories.map((category, categoryIndex) => {
-            const Icon = categoryIcons[categoryIndex];
-            return (
-              <article
-                key={category.title}
-                className={`group relative flex flex-col overflow-hidden rounded-2xl border border-zinc-200/80 bg-white/80 p-6 shadow-lg shadow-zinc-900/5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-violet-500/10 dark:border-zinc-800 dark:bg-zinc-900/50 dark:shadow-none dark:hover:shadow-violet-500/5 ${category.border}`}
+      <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {skillCategories.map((category, categoryIndex) => {
+          const Icon = categoryIcons[categoryIndex];
+          return (
+            <SurfaceCard key={category.title}>
+              <div
+                className={`flex h-11 w-11 items-center justify-center rounded-2xl ${category.iconBg}`}
               >
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${category.accent} opacity-0 transition-opacity duration-300 group-hover:opacity-100`}
-                  aria-hidden
-                />
-                <div className="relative flex flex-1 flex-col">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-500/10 text-violet-600 ring-1 ring-violet-500/20 dark:bg-violet-500/15 dark:text-violet-400">
-                    <Icon />
-                  </div>
-                  <h3 className="mt-4 font-semibold text-zinc-900 dark:text-zinc-100">
-                    {category.title}
-                  </h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-                    {category.description}
-                  </p>
-                  <ul className="mt-5 flex flex-wrap gap-2">
-                    {skillsInCategory(category.skills).map((skill) => (
-                      <li key={skill}>
-                        <span className="inline-flex items-center rounded-full border border-zinc-200/80 bg-zinc-50/90 px-3.5 py-1.5 text-sm font-medium text-zinc-800 transition-colors group-hover:border-violet-500/25 group-hover:bg-violet-500/10 group-hover:text-violet-800 dark:border-zinc-700 dark:bg-zinc-800/80 dark:text-zinc-200 dark:group-hover:border-violet-500/30 dark:group-hover:bg-violet-500/15 dark:group-hover:text-violet-200">
-                          {skill}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </article>
-            );
-          })}
-
-          {otherSkills.length > 0 ? (
-            <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-zinc-200/80 bg-white/80 p-6 shadow-lg shadow-zinc-900/5 backdrop-blur-sm md:col-span-2 lg:col-span-3 dark:border-zinc-800 dark:bg-zinc-900/50 dark:shadow-none">
-              <h3 className="font-semibold text-zinc-900 dark:text-zinc-100">
-                Also
+                <Icon />
+              </div>
+              <h3 className="mt-5 font-semibold text-foreground">
+                {category.title}
               </h3>
-              <ul className="mt-4 flex flex-wrap gap-2">
-                {otherSkills.map((skill) => (
+              <p className="mt-2 text-sm leading-relaxed text-muted">
+                {category.description}
+              </p>
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {skillsInCategory(category.skills).map((skill) => (
                   <li key={skill}>
-                    <span className="inline-flex rounded-full border border-zinc-200/80 bg-zinc-50/90 px-3.5 py-1.5 text-sm font-medium text-zinc-800 dark:border-zinc-700 dark:bg-zinc-800/80 dark:text-zinc-200">
-                      {skill}
-                    </span>
+                    <SkillPill>{skill}</SkillPill>
                   </li>
                 ))}
               </ul>
-            </article>
-          ) : null}
-        </div>
+            </SurfaceCard>
+          );
+        })}
+
+        {otherSkills.length > 0 ? (
+          <SurfaceCard className="md:col-span-2 lg:col-span-3">
+            <h3 className="font-semibold text-foreground">Also comfortable with</h3>
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {otherSkills.map((skill) => (
+                <li key={skill}>
+                  <SkillPill>{skill}</SkillPill>
+                </li>
+              ))}
+            </ul>
+          </SurfaceCard>
+        ) : null}
       </div>
-    </section>
+    </SectionShell>
   );
 }
