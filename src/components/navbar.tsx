@@ -19,19 +19,13 @@ export function Navbar() {
         {/* Logo */}
         <NavHashLink
           href="#introduction"
-          className="shrink-0 rounded-full ring-2 ring-border/70 transition-all duration-300 hover:scale-105 hover:ring-accent/40"
+          className="shrink-0 transition-all duration-300 hover:scale-105 hover:ring-accent/40"
         >
-          <Image
-            src="/P.png"
-            alt="Parteetjot Singh"
-            width={42}
-            height={42}
-            className="rounded-full"
-          />
+        <span className="text-2xl font-bold font-display">Parteetjot Singh</span>
         </NavHashLink>
 
         {/* Desktop Nav */}
-        <ul className="hidden flex-1 items-center justify-center gap-1 md:flex">
+        <ul className="hidden items-center justify-center gap-1 md:flex">
           {navItems.map((item) => (
             <li key={item.href}>
               <NavHashLink
