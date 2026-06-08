@@ -26,6 +26,9 @@ export const metadata: Metadata = {
   title: "Parteetjot Singh | Frontend Developer",
   description:
     "Portfolio of Parteetjot Singh — Frontend Developer crafting modern web experiences.",
+  icons: {
+    icon: "/P.png",
+  },
 };
 
 export default function RootLayout({
