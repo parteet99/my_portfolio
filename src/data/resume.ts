@@ -43,7 +43,7 @@ export const resume = {
     {
       role: "Junior Frontend Developer",
       company: "Asteron Technology",
-      period: "Sept 2025 — Present",
+      period: "Sept 2025 — August 2026",
       location: "Remote",
       highlights: [
         "Built and shipped responsive product interfaces with Next.js.",

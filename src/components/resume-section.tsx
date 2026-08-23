@@ -245,7 +245,7 @@ export function ResumeSection() {
             </ul>
           </SurfaceCard>
 
-          <SurfaceCard as="div" className="hover:translate-y-0 hover:shadow-card">
+          {/* <SurfaceCard as="div" className="hover:translate-y-0 hover:shadow-card">
             <h4 className="text-sm font-semibold text-foreground">Let&apos;s talk</h4>
             <p className="mt-2 text-sm text-muted">
               Happy to connect about roles or swapping ideas.
@@ -255,7 +255,7 @@ export function ResumeSection() {
               <li>{resume.phone}</li>
               <li className="text-muted">{resume.location}</li>
             </ul>
-          </SurfaceCard>
+          </SurfaceCard> */}
         </aside>
       </div>
 
