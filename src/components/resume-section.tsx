@@ -3,11 +3,22 @@
 import { useCallback, useRef } from "react";
 import { resume, resumeFileName } from "@/data/resume";
 import { ResumePrintDocument } from "@/components/resume-print";
-import { SectionHeader, SectionShell, SkillPill, SurfaceCard } from "@/components/ui/section";
+import {
+  SectionHeader,
+  SectionShell,
+  SkillPill,
+  SurfaceCard,
+} from "@/components/ui/section";
 
 const PRINT_STYLES = `
   @page { size: A4; margin: 14mm; }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
   body {
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
     font-size: 10.5pt;
@@ -16,7 +27,12 @@ const PRINT_STYLES = `
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
-  .resume-print-doc { max-width: 100%; padding: 0; }
+
+  .resume-print-doc {
+    max-width: 100%;
+    padding: 0;
+  }
+
   .resume-print-header {
     display: flex;
     justify-content: space-between;
@@ -25,25 +41,32 @@ const PRINT_STYLES = `
     margin-bottom: 0.85rem;
     border-bottom: 2px solid #7c3aed;
   }
+
   .resume-print-name {
     font-size: 22pt;
     font-weight: 700;
     letter-spacing: -0.02em;
     line-height: 1.1;
   }
+
   .resume-print-title {
     margin-top: 0.2rem;
     font-size: 11pt;
     color: #7c3aed;
     font-weight: 600;
   }
+
   .resume-print-contact {
     text-align: right;
     font-size: 9pt;
     color: #52525b;
     line-height: 1.5;
   }
-  .resume-print-section { margin-bottom: 0.85rem; }
+
+  .resume-print-section {
+    margin-bottom: 0.85rem;
+  }
+
   .resume-print-section h2 {
     font-size: 9.5pt;
     font-weight: 700;
@@ -52,9 +75,19 @@ const PRINT_STYLES = `
     color: #7c3aed;
     margin-bottom: 0.35rem;
   }
-  .resume-print-section > p { color: #3f3f46; }
-  .resume-print-skills { font-size: 9.5pt; }
-  .resume-print-entry { margin-bottom: 0.65rem; }
+
+  .resume-print-section > p {
+    color: #3f3f46;
+  }
+
+  .resume-print-skills {
+    font-size: 9.5pt;
+  }
+
+  .resume-print-entry {
+    margin-bottom: 0.65rem;
+  }
+
   .resume-print-entry-head {
     display: flex;
     flex-wrap: wrap;
@@ -62,16 +95,37 @@ const PRINT_STYLES = `
     gap: 0.35rem 0.5rem;
     margin-bottom: 0.2rem;
   }
-  .resume-print-entry-head strong { font-size: 10.5pt; }
-  .resume-print-entry-head span { font-size: 9.5pt; color: #52525b; }
-  .resume-print-period { margin-left: auto; font-size: 9pt; color: #71717a; }
+
+  .resume-print-entry-head strong {
+    font-size: 10.5pt;
+  }
+
+  .resume-print-entry-head span {
+    font-size: 9.5pt;
+    color: #52525b;
+  }
+
+  .resume-print-period {
+    margin-left: auto;
+    font-size: 9pt;
+    color: #71717a;
+  }
+
   .resume-print-entry ul {
     margin-left: 1.1rem;
     color: #3f3f46;
     font-size: 9.5pt;
   }
-  .resume-print-entry li { margin-bottom: 0.12rem; }
-  .resume-print-details { font-size: 9.5pt; color: #52525b; margin-top: 0.15rem; }
+
+  .resume-print-entry li {
+    margin-bottom: 0.12rem;
+  }
+
+  .resume-print-details {
+    font-size: 9.5pt;
+    color: #52525b;
+    margin-top: 0.15rem;
+  }
 `;
 
 function DownloadIcon() {
@@ -117,9 +171,11 @@ export function ResumeSection() {
 
   const handleDownload = useCallback(() => {
     const source = printRootRef.current;
+
     if (!source) return;
 
     const printWindow = window.open("", "_blank", "noopener,noreferrer");
+
     if (!printWindow) return;
 
     printWindow.document.write(`
@@ -130,9 +186,13 @@ export function ResumeSection() {
           <title>${resume.name} — Resume</title>
           <style>${PRINT_STYLES}</style>
         </head>
-        <body>${source.innerHTML}</body>
+
+        <body>
+          ${source.innerHTML}
+        </body>
       </html>
     `);
+
     printWindow.document.close();
 
     window.setTimeout(() => {
@@ -150,7 +210,9 @@ export function ResumeSection() {
           description="Experience, education, and skills — download a PDF copy if you'd like to share it with your team."
         />
 
-        {/* <button
+        {/* Enable when you want the PDF download button */}
+        {/*
+        <button
           type="button"
           onClick={handleDownload}
           className="inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 self-start rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-accent-foreground shadow-md shadow-accent/20 transition hover:bg-accent/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:self-auto"
@@ -158,84 +220,153 @@ export function ResumeSection() {
           <DownloadIcon />
           Download PDF
           <span className="sr-only">({resumeFileName})</span>
-        </button> */}
+        </button>
+        */}
       </div>
 
       <div className="mt-12 grid gap-8 lg:grid-cols-[minmax(0,1fr)_280px]">
-        <SurfaceCard as="div" className="hover:translate-y-0 hover:shadow-card">
+        {/* Main resume content */}
+        <SurfaceCard
+          as="div"
+          className="hover:translate-y-0 hover:shadow-card"
+        >
           <header className="border-b border-border pb-6">
             <h3 className="font-display text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
               {resume.name}
             </h3>
+
             <p className="mt-1 text-base font-medium text-accent">
               {resume.title}
             </p>
+
             <p className="mt-4 text-sm leading-relaxed text-muted">
               {resume.summary}
             </p>
           </header>
 
           <div className="mt-6 space-y-8">
-            <div>
+            {/* Experience */}
+            <section>
               <h4 className="text-sm font-semibold text-foreground">
                 Experience
               </h4>
-              <ul className="mt-4 space-y-6">
+
+              <ul className="mt-4 space-y-7">
                 {resume.experience.map((job) => (
                   <li key={`${job.company}-${job.period}`}>
+                    {/* Job header */}
                     <div className="flex flex-wrap items-baseline justify-between gap-2">
                       <p className="font-semibold text-foreground">
                         {job.role}
                       </p>
+
                       <span className="rounded-full bg-surface-muted px-2.5 py-0.5 text-xs font-medium text-muted">
                         {job.period}
                       </span>
                     </div>
+
                     <p className="text-sm text-muted">
                       {job.company}
                       {job.location ? ` · ${job.location}` : ""}
                     </p>
+
+                    {/* Highlights */}
                     <ul className="mt-2 space-y-1.5 text-sm leading-relaxed text-muted">
-                      {job.highlights.slice(0, 2).map((item) => (
+                      {job.highlights.map((item) => (
                         <li key={item} className="flex gap-2.5">
                           <span
                             className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
                             aria-hidden
                           />
-                          {item}
+                          <span>{item}</span>
                         </li>
                       ))}
                     </ul>
+
+                    {/* Projects */}
+                    {job.projects && job.projects.length > 0 && (
+                      <div className="mt-4 space-y-3">
+                        {job.projects.map((project) => (
+                          <div
+                            key={project.name}
+                            className="rounded-xl border border-border bg-surface-muted/50 p-4"
+                          >
+                            <div className="flex flex-wrap items-center justify-between gap-2">
+                              <p className="font-semibold text-foreground">
+                                {project.name}
+                              </p>
+
+                              {project.url && (
+                                <a
+                                  href={project.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-xs font-medium text-accent hover:underline"
+                                >
+                                  Live Project →
+                                </a>
+                              )}
+                            </div>
+
+                            <p className="mt-1 text-sm leading-relaxed text-muted">
+                              {project.description}
+                            </p>
+
+                            <div className="mt-3 flex flex-wrap gap-2">
+                              {project.technologies.map((technology) => (
+                                <SkillPill key={technology}>
+                                  {technology}
+                                </SkillPill>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </li>
                 ))}
               </ul>
-            </div>
+            </section>
 
-            <div>
+            {/* Education */}
+            <section>
               <h4 className="text-sm font-semibold text-foreground">
                 Education
               </h4>
+
               <ul className="mt-4 space-y-4">
                 {resume.education.map((edu) => (
                   <li key={`${edu.school}-${edu.period}`}>
                     <p className="font-semibold text-foreground">
                       {edu.degree}
                     </p>
+
                     <p className="text-sm text-muted">
                       {edu.school} · {edu.period}
                     </p>
+
+                    {edu.details && (
+                      <p className="mt-1 text-sm text-muted">
+                        {edu.details}
+                      </p>
+                    )}
                   </li>
                 ))}
               </ul>
-            </div>
+            </section>
           </div>
         </SurfaceCard>
 
+        {/* Skills */}
         <aside className="flex flex-col gap-4">
-          <SurfaceCard as="div" className="hover:translate-y-0 hover:shadow-card">
+          <SurfaceCard
+            as="div"
+            className="hover:translate-y-0 hover:shadow-card"
+          >
             <h4 className="text-sm font-semibold text-foreground">
               Core skills
             </h4>
+
             <ul className="mt-4 flex flex-wrap gap-2">
               {resume.skills.map((skill) => (
                 <li key={skill}>
@@ -245,25 +376,31 @@ export function ResumeSection() {
             </ul>
           </SurfaceCard>
 
-          {/* <SurfaceCard as="div" className="hover:translate-y-0 hover:shadow-card">
-            <h4 className="text-sm font-semibold text-foreground">Let&apos;s talk</h4>
+          {/*
+          <SurfaceCard
+            as="div"
+            className="hover:translate-y-0 hover:shadow-card"
+          >
+            <h4 className="text-sm font-semibold text-foreground">
+              Let&apos;s talk
+            </h4>
+
             <p className="mt-2 text-sm text-muted">
               Happy to connect about roles or swapping ideas.
             </p>
+
             <ul className="mt-4 space-y-2 text-sm text-foreground">
               <li>{resume.email}</li>
               <li>{resume.phone}</li>
               <li className="text-muted">{resume.location}</li>
             </ul>
-          </SurfaceCard> */}
+          </SurfaceCard>
+          */}
         </aside>
       </div>
 
-      <div
-        ref={printRootRef}
-        className="sr-only"
-        aria-hidden
-      >
+      {/* Hidden printable resume */}
+      <div ref={printRootRef} className="sr-only" aria-hidden>
         <ResumePrintDocument />
       </div>
     </SectionShell>

@@ -8,30 +8,69 @@ import {
 
 const skillCategories = [
   {
-    title: "Languages & frameworks",
+    title: "Fullstack Development",
     description:
-      "The everyday tools I reach for when shaping products on the web.",
-    iconBg: "bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-300",
+      "A practical full-stack toolkit covering frontend development, backend APIs, databases, and the tools I use to build and ship web applications.",
+    iconBg:
+      "bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-300",
     skills: [
       "TypeScript",
       "React",
       "Next.js",
       "HTML & CSS",
       "Tailwind CSS",
+      "Responsive UI",
     ],
   },
   {
-    title: "Craft & quality",
+    title: "Backend & APIs",
     description:
-      "How I keep interfaces fast, inclusive, and pleasant to maintain.",
-    iconBg: "bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300",
-    skills: ["Git", "Responsive UI", "Performance", "Accessibility"],
+      "Designing APIs, authentication flows, and backend features that connect the product together.",
+    iconBg:
+      "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300",
+    skills: [
+      "Node.js",
+      "Express.js",
+      "REST APIs",
+      "API Integration",
+      "JWT Authentication",
+      "CRUD Operations",
+      "Rate Limiting",
+    ],
   },
   {
-    title: "Tools & workflow",
-    description: "What helps me move from idea to shipped UI with confidence.",
-    iconBg: "bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-300",
-    skills: ["ChatGPT", "Cursor IDE", "Postman", "Vs Code IDE"],
+    title: "Database & Storage",
+    description:
+      "Working with relational data, queries, schema design, and application file storage.",
+    iconBg:
+      "bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300",
+    skills: [
+      "PostgreSQL",
+      "SQL",
+      "Database Design",
+      "Cloudinary",
+      "File Uploads",
+    ],
+  },
+  {
+    title: "Engineering & Tools",
+    description:
+      "The tools and practices I use to build, test, debug, and improve applications.",
+    iconBg:
+      "bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-300",
+    skills: [
+      "Git",
+      "GitHub",
+      "Postman",
+      "Performance",
+      "Accessibility",
+      "Pagination",
+      "Search & Filtering",
+      "AI-Assisted Development",
+      "ChatGPT",
+      "Cursor IDE",
+      "VS Code",
+    ],
   },
 ] as const;
 
@@ -72,6 +111,26 @@ function SparklesIcon() {
   );
 }
 
+function DatabaseIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-5 w-5"
+      aria-hidden
+    >
+      <ellipse cx="12" cy="5" rx="8" ry="3" />
+      <path d="M4 5v7c0 1.66 3.58 3 8 3s8-1.34 8-3V5" />
+      <path d="M4 12v7c0 1.66 3.58 3 8 3s8-1.34 8-3v-7" />
+    </svg>
+  );
+}
+
 function WrenchIcon() {
   return (
     <svg
@@ -90,7 +149,7 @@ function WrenchIcon() {
   );
 }
 
-const categoryIcons = [CodeIcon, SparklesIcon, WrenchIcon] as const;
+const categoryIcons = [CodeIcon, SparklesIcon, WrenchIcon, DatabaseIcon] as const;
 
 function skillsInCategory(
   names: readonly string[],
@@ -104,7 +163,6 @@ export function SkillsSection() {
   const categorized = new Set(
     skillCategories.flatMap((category) => category.skills),
   );
-  const otherSkills = resume.skills.filter((skill) => !categorized.has(skill));
 
   return (
     <SectionShell id="skills" variant="muted">
@@ -114,7 +172,7 @@ export function SkillsSection() {
         description="A practical mix of frontend craft, modern frameworks, and the habits that keep projects healthy long after launch."
       />
 
-      <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-14 grid gap-6 md:grid-cols-2">
         {skillCategories.map((category, categoryIndex) => {
           const Icon = categoryIcons[categoryIndex];
           return (
@@ -140,19 +198,6 @@ export function SkillsSection() {
             </SurfaceCard>
           );
         })}
-
-        {otherSkills.length > 0 ? (
-          <SurfaceCard className="md:col-span-2 lg:col-span-3">
-            <h3 className="font-semibold text-foreground">Also comfortable with</h3>
-            <ul className="mt-4 flex flex-wrap gap-2">
-              {otherSkills.map((skill) => (
-                <li key={skill}>
-                  <SkillPill>{skill}</SkillPill>
-                </li>
-              ))}
-            </ul>
-          </SurfaceCard>
-        ) : null}
       </div>
     </SectionShell>
   );
