@@ -46,7 +46,7 @@ const skillCategories = [
       "bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300",
     skills: [
       "PostgreSQL",
-      "SQL",
+      "Redis",
       "Database Design",
       "Cloudinary",
       "File Uploads",

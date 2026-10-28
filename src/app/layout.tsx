@@ -3,7 +3,6 @@ import { Geist, Geist_Mono, Syne } from "next/font/google";
 import { Navbar } from "@/components/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
-import { AnimatedBackground } from "@/components/animations/animated-background";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,9 +21,9 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  title: "Parteetjot Singh | Frontend Developer",
+  title: "Parteetjot Singh | Fullstack Developer",
   description:
-    "Portfolio of Parteetjot Singh — Frontend Developer crafting modern web experiences.",
+    "Portfolio of Parteetjot Singh — Fullstack Developer crafting modern web experiences.",
   icons: {
     icon: "/P.png",
   },
@@ -47,7 +46,6 @@ export default function RootLayout({
           defaultTheme="dark"
           forcedTheme="dark"
         >
-          <AnimatedBackground />
           <Navbar />
           <main className="flex flex-1 flex-col pt-16">{children}</main>
         </ThemeProvider>

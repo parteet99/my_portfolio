@@ -30,7 +30,7 @@ export type ResumePersonalProject = {
 
 export const resume = {
     name: "Parteetjot Singh",
-    title: "Junior Fullstack Developer",
+    title: "Fullstack Developer",
     location: "Available for Remote & Hybrid",
     email: "parteet99@outlook.com",
     phone: "+91 97792 52782",
@@ -41,7 +41,7 @@ export const resume = {
     },
 
     summary:
-        "Junior fullstack developer focused on building responsive, maintainable, and user-friendly web applications. Experienced with React, Next.js, Node.js, Express.js, PostgreSQL, REST APIs, authentication, and third-party integrations.",
+        "Fullstack developer focused on building responsive, maintainable, and user-friendly web applications. Experienced with React, Next.js, Node.js, Express.js, PostgreSQL, REST APIs, authentication, and third-party integrations.",
 
     skills: [
         "TypeScript",
@@ -58,7 +58,7 @@ export const resume = {
         "CRUD Operations",
         "Rate Limiting",
         "PostgreSQL",
-        "SQL",
+        "Redis",
         "Database Design",
         "Cloudinary",
         "File Uploads",
@@ -146,6 +146,7 @@ export const resume = {
                 "Node.js",
                 "Express.js",
                 "PostgreSQL",
+                "Redis",
                 "REST APIs",
                 "JWT",
                 "Cloudinary",

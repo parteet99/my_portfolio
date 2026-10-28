@@ -94,7 +94,7 @@ export function IntroductionSection() {
               <div className="flex justify-between gap-4">
                 <dt className="text-muted">Focus</dt>
                 <dd className="font-medium text-foreground text-right">
-                  Frontend & UI
+                  Fullstack development
                 </dd>
               </div>
               <div className="flex justify-between gap-4">
